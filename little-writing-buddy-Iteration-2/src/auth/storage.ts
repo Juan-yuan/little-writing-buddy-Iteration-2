@@ -1,4 +1,5 @@
 import type { AuthUser } from './types'
+import { validateSignUpCredentials } from './validation'
 
 const USER_KEY = 'little-writing-buddy-user'
 const ACCOUNTS_KEY = 'little-writing-buddy-accounts'
@@ -47,8 +48,8 @@ export function signUpAccount(input: {
   const name = input.name.trim()
   const password = input.password
 
-  if (!name) return { error: 'Please enter a name.' }
-  if (!password) return { error: 'Please enter a password.' }
+  const validationError = validateSignUpCredentials(name, password)
+  if (validationError) return { error: validationError }
 
   const accounts = readAccounts()
   if (accounts.some((account) => account.name.toLowerCase() === name.toLowerCase())) {

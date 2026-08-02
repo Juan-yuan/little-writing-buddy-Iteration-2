@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { X } from 'lucide-react'
 import { useAuth } from '../auth/useAuth'
 import type { AuthMode } from '../auth/types'
+import { NAME_MAX_LENGTH, PASSWORD_MAX_LENGTH } from '../auth/validation'
 import { auth } from '../content/siteCopy'
 
 type AuthModalProps = {
@@ -82,6 +83,7 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
                 setError(null)
               }}
               placeholder={auth.namePlaceholder}
+              maxLength={NAME_MAX_LENGTH}
               required
             />
           </label>
@@ -98,6 +100,7 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
                 setError(null)
               }}
               placeholder={auth.passwordPlaceholder}
+              maxLength={isSignUp ? PASSWORD_MAX_LENGTH : undefined}
               required
             />
           </label>

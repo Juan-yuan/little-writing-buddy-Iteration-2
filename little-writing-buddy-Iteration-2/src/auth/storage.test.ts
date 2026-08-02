@@ -45,6 +45,40 @@ describe('feature: local auth storage', () => {
     })
   })
 
+  it('wrong: junk sign-up names and weak passwords are rejected', () => {
+    expect(
+      signUpAccount({
+        name: '111111111111111111111111111111111111111111111',
+        password: 'secret',
+      }),
+    ).toEqual({
+      error: 'Please use a shorter name (up to 20 characters).',
+    })
+    expect(signUpAccount({ name: '11111', password: 'secret' })).toEqual({
+      error: 'Please choose a name with letters.',
+    })
+    expect(signUpAccount({ name: 'aaaa', password: 'secret' })).toEqual({
+      error: 'Please choose a different name.',
+    })
+    expect(signUpAccount({ name: 'A', password: 'secret' })).toEqual({
+      error: 'Name needs at least 2 characters.',
+    })
+    expect(signUpAccount({ name: 'Sam', password: '1111' })).toEqual({
+      error: 'Please choose a stronger password.',
+    })
+    expect(signUpAccount({ name: 'Sam', password: 'abc' })).toEqual({
+      error: 'Password needs at least 4 characters.',
+    })
+    expect(
+      signUpAccount({
+        name: 'Sam',
+        password: '1'.repeat(40),
+      }),
+    ).toEqual({
+      error: 'Please use a shorter password (up to 32 characters).',
+    })
+  })
+
   it('wrong: corrupt storage values fall back safely', () => {
     localStorage.setItem('little-writing-buddy-accounts', '{not-json')
     localStorage.setItem('little-writing-buddy-user', '{not-json')
