@@ -32,11 +32,25 @@
   --depth-sky: #9fd0f0;
   --depth-mint: #a8e0b4;
   --depth-lavender: #d2c8f5;
+  /* Sticker elevates — keep offsets consistent across button colors */
   --elevate-sm: 3px 3px 0 var(--depth-peach);
+  --elevate-sm-hover: 3px 5px 0 var(--depth-peach);
+  --elevate-sm-active: 1px 1px 0 var(--depth-peach);
+  --elevate-sky: 3px 3px 0 var(--depth-sky);
+  --elevate-sky-hover: 3px 5px 0 var(--depth-sky);
+  --elevate-sky-active: 1px 1px 0 var(--depth-sky);
+  --elevate-coral: 3px 3px 0 var(--depth-coral);
+  --elevate-coral-hover: 3px 5px 0 var(--depth-coral);
+  --elevate-coral-active: 1px 1px 0 var(--depth-coral);
+  --elevate-mint: 3px 3px 0 var(--depth-mint);
+  --elevate-mint-hover: 3px 5px 0 var(--depth-mint);
+  --elevate-mint-active: 1px 1px 0 var(--depth-mint);
+  --elevate-lavender: 3px 3px 0 var(--depth-lavender);
+  --elevate-lavender-hover: 3px 5px 0 var(--depth-lavender);
+  --elevate-lavender-active: 1px 1px 0 var(--depth-lavender);
   --elevate: 5px 5px 0 var(--depth-lavender);
   --elevate-lg: 8px 8px 0 var(--depth-sky);
   --elevate-sun: 5px 5px 0 var(--depth-sun);
-  --elevate-coral: 0 6px 0 var(--depth-coral);
   --radius: 16px;
   --radius-sm: 10px;
   --radius-pill: 999px;

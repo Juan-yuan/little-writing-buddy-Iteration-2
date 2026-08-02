@@ -35,11 +35,13 @@ export function LandingPage() {
             {site.name}
           </h1>
           <p className="landing-description">{landing.description}</p>
-          <Link to="/practice" className="landing-cta landing-cta-primary">
-            <span className="landing-cta-shine" aria-hidden="true" />
-            <span className="landing-cta-label">{landing.ctaPrimary}</span>
-            <ArrowRight className="landing-cta-arrow" size={18} aria-hidden="true" />
-          </Link>
+          <span className="landing-cta-wrap">
+            <Link to="/practice" className="landing-cta landing-cta-primary">
+              <span className="landing-cta-shine" aria-hidden="true" />
+              <span className="landing-cta-label">{landing.ctaPrimary}</span>
+              <ArrowRight className="landing-cta-arrow" size={18} aria-hidden="true" />
+            </Link>
+          </span>
         </div>
 
         <div className="landing-hero-visual" aria-hidden="true">
