@@ -17,7 +17,7 @@ export function AppHeader() {
         </div>
       </Link>
       <div className="header-actions">
-        <Link to="/" className="header-home-link">
+        <Link to="/" className="header-action-btn">
           <Home size={16} aria-hidden="true" />
           {header.backHome}
         </Link>

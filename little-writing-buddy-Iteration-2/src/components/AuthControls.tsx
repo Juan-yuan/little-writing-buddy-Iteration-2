@@ -17,7 +17,7 @@ export function AuthControls() {
             <span className="auth-greeting">{auth.hello(user.name)}</span>
             <button
               type="button"
-              className="auth-button auth-button-secondary"
+              className="header-action-btn"
               onClick={signOut}
             >
               <LogOut size={16} aria-hidden="true" />
@@ -28,7 +28,7 @@ export function AuthControls() {
           <>
             <button
               type="button"
-              className="auth-button auth-button-secondary"
+              className="header-action-btn"
               onClick={() => setMode('sign-in')}
             >
               <LogIn size={16} aria-hidden="true" />
@@ -36,7 +36,7 @@ export function AuthControls() {
             </button>
             <button
               type="button"
-              className="auth-button auth-button-primary"
+              className="header-action-btn"
               onClick={() => setMode('sign-up')}
             >
               <UserPlus size={16} aria-hidden="true" />

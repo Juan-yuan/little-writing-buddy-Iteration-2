@@ -808,16 +808,18 @@
   gap: 10px 14px;
 }
 
-.header-home-link {
+/* Shared chrome for Home / Sign in / Sign up / Sign out in the header */
+.header-action-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
   min-height: 40px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border: 2px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--paper);
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: 0.82rem;
   font-weight: 800;
   text-decoration: none;
@@ -826,17 +828,19 @@
     transform 160ms ease,
     border-color 160ms ease,
     color 160ms ease,
-    box-shadow 160ms ease;
+    box-shadow 160ms ease,
+    background-color 160ms ease;
 }
 
-.header-home-link:hover {
+.header-action-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   border-color: var(--sky);
   color: var(--ink);
+  background: var(--paper);
   box-shadow: var(--elevate-sm-hover);
 }
 
-.header-home-link:active {
+.header-action-btn:active:not(:disabled) {
   transform: translateY(1px);
   box-shadow: var(--elevate-sm-active);
 }
@@ -2388,6 +2392,7 @@ h3 {
     width: 100%;
   }
 
+  .header-actions .header-action-btn,
   .auth-button {
     flex: 1 1 auto;
     min-width: min(140px, 100%);
