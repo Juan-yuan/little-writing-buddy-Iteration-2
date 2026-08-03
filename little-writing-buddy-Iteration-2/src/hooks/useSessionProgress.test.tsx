@@ -1,7 +1,15 @@
 import { renderHook, act } from '@testing-library/react'
+import type { ReactNode } from 'react'
 import { describe, expect, it } from 'vitest'
+import { AuthProvider } from '../auth/AuthContext'
+import { DEMO_ACCOUNT, DEMO_PROGRESS } from '../auth/demoAccount'
+import { ensureDemoAccount, signInAccount } from '../auth/storage'
 import { useSessionProgress } from './useSessionProgress'
 import type { TracingResult } from '../utils/tracingAccuracy'
+
+function authWrapper({ children }: { children: ReactNode }) {
+  return <AuthProvider>{children}</AuthProvider>
+}
 
 function makeResult(overrides: Partial<TracingResult> = {}): TracingResult {
   return {
@@ -82,6 +90,26 @@ describe('feature: session progress', () => {
     expect(result.current.session.attemptsCompleted).toBe(2)
     expect(result.current.session.earnedBadges.filter((b) => b.id === 'letter-star')).toHaveLength(
       1,
+    )
+  })
+
+  it('correct: demo account loads prepopulated progress after sign-in', () => {
+    ensureDemoAccount()
+    signInAccount({
+      email: DEMO_ACCOUNT.email,
+      password: DEMO_ACCOUNT.password,
+    })
+
+    const { result } = renderHook(() => useSessionProgress(), {
+      wrapper: authWrapper,
+    })
+
+    expect(result.current.session.attemptsCompleted).toBe(
+      DEMO_PROGRESS.attemptsCompleted,
+    )
+    expect(result.current.session.bestScore).toBe(DEMO_PROGRESS.bestScore)
+    expect(result.current.session.earnedBadges).toHaveLength(
+      DEMO_PROGRESS.earnedBadges.length,
     )
   })
 })

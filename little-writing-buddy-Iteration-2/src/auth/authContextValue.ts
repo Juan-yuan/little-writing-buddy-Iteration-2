@@ -3,8 +3,8 @@ import type { AuthUser } from './types'
 
 export type AuthContextValue = {
   user: AuthUser | null
-  signIn: (name: string, password: string) => string | null
-  signUp: (name: string, password: string) => string | null
+  signIn: (email: string, password: string) => string | null
+  signUp: (name: string, email: string, password: string) => string | null
   signOut: () => void
 }
 

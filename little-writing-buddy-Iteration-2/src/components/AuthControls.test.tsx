@@ -29,7 +29,11 @@ describe('feature: auth controls', () => {
 
   it('wrong: signed-in controls greet the user and support sign-out', async () => {
     const user = userEvent.setup()
-    signUpAccount({ name: 'Jamie', password: 'secret' })
+    signUpAccount({
+      name: 'Jamie',
+      email: 'jamie@school.edu',
+      password: 'secret',
+    })
     wrap(<AuthControls />)
 
     expect(screen.getByText(auth.hello('Jamie'))).toBeInTheDocument()

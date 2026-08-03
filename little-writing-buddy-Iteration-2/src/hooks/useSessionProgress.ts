@@ -1,10 +1,16 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { AuthContext } from '../auth/authContextValue'
+import {
+  readGuestProgress,
+  readUserProgress,
+  writeGuestProgress,
+  writeUserProgress,
+  type StoredProgress,
+} from '../auth/progressStorage'
 import { session as sessionCopy } from '../content/siteCopy'
 import type { BadgeDefinition } from '../utils/badges'
 import { badgeForScore } from '../utils/badges'
 import type { TracingResult } from '../utils/tracingAccuracy'
-
-const STORAGE_KEY = 'little-writing-buddy-session'
 
 export interface SessionProgressState {
   attemptsCompleted: number
@@ -22,35 +28,46 @@ const defaultState: SessionProgressState = {
   earnedBadges: [],
 }
 
-function loadSession(): SessionProgressState {
-  try {
-    const raw = sessionStorage.getItem(STORAGE_KEY)
-    if (!raw) return defaultState
-    const parsed = JSON.parse(raw) as SessionProgressState
-    return {
-      ...defaultState,
-      ...parsed,
-      earnedBadges: parsed.earnedBadges ?? [],
-    }
-  } catch {
-    return defaultState
+function normalizeProgress(raw: StoredProgress | null): SessionProgressState {
+  if (!raw) return defaultState
+  return {
+    ...defaultState,
+    ...raw,
+    earnedBadges: raw.earnedBadges ?? [],
   }
 }
 
-function saveSession(state: SessionProgressState) {
-  try {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-  } catch {
-    // sessionStorage unavailable — keep in-memory only
+function loadProgress(userId: string | null): SessionProgressState {
+  if (userId) {
+    return normalizeProgress(readUserProgress(userId))
   }
+  return normalizeProgress(readGuestProgress())
+}
+
+function saveProgress(userId: string | null, state: SessionProgressState) {
+  if (userId) {
+    writeUserProgress(userId, state)
+    return
+  }
+  writeGuestProgress(state)
 }
 
 export function useSessionProgress() {
-  const [session, setSession] = useState<SessionProgressState>(loadSession)
+  const auth = useContext(AuthContext)
+  const userId = auth?.user?.id ?? null
+  const sessionOwnerRef = useRef(userId)
+  const [session, setSession] = useState<SessionProgressState>(() =>
+    loadProgress(userId),
+  )
 
   useEffect(() => {
-    saveSession(session)
-  }, [session])
+    if (sessionOwnerRef.current !== userId) {
+      sessionOwnerRef.current = userId
+      setSession(loadProgress(userId))
+      return
+    }
+    saveProgress(userId, session)
+  }, [session, userId])
 
   const recordAttempt = useCallback(
     (result: TracingResult): BadgeDefinition | undefined => {

@@ -949,12 +949,14 @@
 }
 
 .auth-modal {
-  width: min(400px, 100%);
+  width: min(440px, 100%);
   border: 3px solid var(--ink);
   border-radius: var(--radius);
   background: linear-gradient(180deg, #fff, var(--paper));
   box-shadow: var(--elevate-lg);
   padding: 18px 18px 16px;
+  max-height: min(90vh, 720px);
+  overflow-y: auto;
 }
 
 .auth-modal-header {
@@ -1004,6 +1006,87 @@
   font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.45;
+}
+
+.auth-demo {
+  margin-top: 14px;
+  padding: 12px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--sky) 10%, white);
+}
+
+.auth-demo-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.auth-demo-body {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.auth-demo-credentials {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.auth-demo-credentials div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.auth-demo-credentials dt {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.auth-demo-credentials dd {
+  margin: 0;
+}
+
+.auth-demo-credentials code {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.auth-demo-fill {
+  width: 100%;
+  margin-top: 12px;
+  min-height: 42px;
+}
+
+.auth-success {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.auth-signed-in-note {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 800;
 }
 
 .auth-form {

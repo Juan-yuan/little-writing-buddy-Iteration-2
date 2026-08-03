@@ -15,7 +15,7 @@ into the practice workspace at `/practice`.
 - **A to Z letter selection** — choose any letter with uppercase or lowercase mode
 - **Handwriting guides** — dotted guide letters with top, mid, baseline, and bottom lines
 - **Accuracy feedback** — session score and child-friendly tips after each attempt
-- **Sign-in** — name + password accounts stored in the browser; no server setup needed
+- **Sign-in** — email + password accounts stored in this browser only (never uploaded); includes a demo account with sample progress
 - **Secure HTTP error pages** — dedicated 404 / 500 / 502 pages that hide internal details
 - **Progress summary** — tries completed, best score, and badges saved in the browser tab
 - **Printable worksheets** — pick letters, preview tracing rows, print or download PDF (A4)
@@ -95,6 +95,26 @@ npm run dev
 
 Sign in / Sign up work immediately — no API keys or database setup.
 
+Accounts are **local to the browser**. Display name, email, and password are
+saved in `localStorage` on this device only and are never sent to a server.
+Creating an account shows a confirmation so it is clear the profile was stored
+on-device, not in a cloud backend.
+
+### Demo account (for reviewers and sponsors)
+
+A prepopulated demo account is created automatically in every browser:
+
+| Field | Value |
+|-------|-------|
+| Email | `demo@littlewritingbuddy.edu` |
+| Password | `Demo1234` |
+| Display name | Demo Learner |
+
+Sign in with those credentials (or tap **Fill demo details** on the sign-in
+modal) to open a profile that already has sample tries, a best score, and
+badges. You can also create your own local account with a display name, email,
+and password.
+
 ### Security — HTTP error pages
 
 Open **Security & status pages** on the landing footer (or go to `/security`) to review:
@@ -155,9 +175,9 @@ projects, common settings are:
 - **Output directory:** `dist`
 
 No environment variables are required. After publish, visitors can sign up and
-sign in directly.
+sign in directly. Reviewers can use the demo account above without registering.
 
 ## Out of Scope
 
 This project does not include a cloud backend, shared multi-device accounts, or
-class management. Login data stays in each visitor’s browser.
+class management. Login data and saved progress stay in each visitor’s browser.
