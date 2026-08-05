@@ -66,9 +66,9 @@ export const FeedbackPanel = forwardRef<HTMLElement, FeedbackPanelProps>(
               </div>
               <div className="score-card-copy">
                 <p className="score-label">{copy.scoreLabel}</p>
-                {hasResult && summary.onGuidePercent > 0 && (
+                {showScore && (
                   <p className="score-detail">
-                    {copy.onGuide(summary.onGuidePercent)}
+                    {copy.onGuide(summary.latestScore)}
                   </p>
                 )}
               </div>

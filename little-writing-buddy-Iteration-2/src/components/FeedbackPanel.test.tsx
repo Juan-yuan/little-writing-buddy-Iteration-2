@@ -38,7 +38,7 @@ describe('feature: feedback panel', () => {
     expect(ref.current).toBeInstanceOf(HTMLElement)
     expect(screen.getByRole('status')).toHaveTextContent('Great tracing!')
     expect(screen.getByText('90%')).toBeInTheDocument()
-    expect(screen.getByText(copy.onGuide(85))).toBeInTheDocument()
+    expect(screen.getByText(copy.onGuide(90))).toBeInTheDocument()
     expect(screen.getByText(copy.newBadge('⭐', 'Letter Star'))).toBeInTheDocument()
     expect(screen.getByText('Letter Star')).toBeInTheDocument()
     expect(screen.getByText('88%')).toBeInTheDocument()
@@ -77,5 +77,21 @@ describe('feature: feedback panel', () => {
 
     expect(screen.getByRole('status')).toHaveClass('practice')
     expect(screen.getByText(copy.scoreLabel).closest('.score-card')!).toHaveTextContent('—')
+  })
+
+  it('correct: on-the-lines detail matches the score, not a separate guide ratio', () => {
+    render(
+      <FeedbackPanel
+        practiceStatus="review"
+        summary={makeSummary({
+          latestScore: 50,
+          onGuidePercent: 100,
+        })}
+      />,
+    )
+
+    expect(screen.getByText('50%')).toBeInTheDocument()
+    expect(screen.getByText(copy.onGuide(50))).toBeInTheDocument()
+    expect(screen.queryByText(copy.onGuide(100))).not.toBeInTheDocument()
   })
 })
